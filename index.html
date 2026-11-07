@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Cr0s Dice</title>
     
-    <!-- Configuración PWA Nativa para iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cr0s">
     
-    <!-- Icono de la App para la pantalla de inicio de iOS -->
+    <link rel="manifest" href="manifest.json">
+    
     <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23121212'/><rect x='35' y='35' width='110' height='110' rx='22' fill='%231e1e1e' stroke='%23333333' stroke-width='4'/><circle cx='65' cy='65' r='10' fill='%2300ffcc'/><circle cx='115' cy='115' r='10' fill='%2300ffcc'/><circle cx='90' cy='90' r='10' fill='%2300ffcc'/><text x='90' y='160' font-family='Arial, sans-serif' font-weight='900' font-size='16' fill='%2300ffcc' text-anchor='middle' letter-spacing='2'>Cr0s</text></svg>">
 
     <style>
@@ -33,7 +33,6 @@
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
-            /* Evita rebotes molestos al deslizar en iOS */
             position: fixed;
             left: 0;
             top: 0;
@@ -88,7 +87,6 @@
             transition: opacity 0.1s ease;
         }
         
-        /* Mapeo de posiciones para cada número del dado */
         .val-1 .d5 { opacity: 1; }
         .val-2 .d1, .val-2 .d9 { opacity: 1; }
         .val-3 .d1, .val-3 .d5, .val-3 .d9 { opacity: 1; }
@@ -154,14 +152,10 @@
     <script>
         function rollDice() {
             const dice = document.getElementById('dice');
-            
-            // Vibración háptica si el dispositivo lo soporta
             if (navigator.vibrate) {
                 navigator.vibrate(50);
             }
-
             dice.classList.add('rolling');
-            
             setTimeout(() => {
                 const result = Math.floor(Math.random() * 6) + 1;
                 dice.className = 'dice val-' + result;
