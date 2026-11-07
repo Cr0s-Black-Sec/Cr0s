@@ -1,167 +1,382 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Cr0s Dice</title>
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Cr0s">
-    
-    <link rel="manifest" href="manifest.json">
-    
-    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23121212'/><rect x='35' y='35' width='110' height='110' rx='22' fill='%231e1e1e' stroke='%23333333' stroke-width='4'/><circle cx='65' cy='65' r='10' fill='%2300ffcc'/><circle cx='115' cy='115' r='10' fill='%2300ffcc'/><circle cx='90' cy='90' r='10' fill='%2300ffcc'/><text x='90' y='160' font-family='Arial, sans-serif' font-weight='900' font-size='16' fill='%2300ffcc' text-anchor='middle' letter-spacing='2'>Cr0s</text></svg>">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            overflow: hidden;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-        header {
-            margin-top: 60px;
-            text-align: center;
-        }
-        .brand {
-            font-size: 30px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            color: #00ffcc;
-            text-transform: uppercase;
-            text-shadow: 0 0 14px rgba(0, 255, 204, 0.4);
-        }
-        .subtitle {
-            font-size: 11px;
-            color: #777;
-            margin-top: 6px;
-            letter-spacing: 2px;
-        }
-        .dice-container {
-            perspective: 1000px;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .dice {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #1e1e1e, #121212);
-            border: 2px solid #2a2a2a;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.08);
-            display: grid;
-            grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-            padding: 16px;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .dot {
-            width: 18px;
-            height: 18px;
-            background-color: #00ffcc;
-            border-radius: 50%;
-            justify-self: center;
-            align-self: center;
-            box-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
-            opacity: 0;
-            transition: opacity 0.1s ease;
-        }
-        
-        .val-1 .d5 { opacity: 1; }
-        .val-2 .d1, .val-2 .d9 { opacity: 1; }
-        .val-3 .d1, .val-3 .d5, .val-3 .d9 { opacity: 1; }
-        .val-4 .d1, .val-4 .d3, .val-4 .d7, .val-4 .d9 { opacity: 1; }
-        .val-5 .d1, .val-5 .d3, .val-5 .d5, .val-5 .d7, .val-5 .d9 { opacity: 1; }
-        .val-6 .d1, .val-6 .d3, .val-6 .d4, .val-6 .d6, .val-6 .d7, .val-6 .d9 { opacity: 1; }
-
-        .controls {
-            margin-bottom: 70px;
-            width: 100%;
-            padding: 0 30px;
-        }
-        .btn-roll {
-            width: 100%;
-            padding: 18px;
-            background: #00ffcc;
-            color: #000;
-            border: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.3);
-            cursor: pointer;
-            transition: transform 0.1s ease, background-color 0.2s ease;
-        }
-        .btn-roll:active {
-            transform: scale(0.96);
-            background: #00dbb3;
-        }
-        .rolling {
-            animation: diceShake 0.4s ease-in-out;
-        }
-        @keyframes diceShake {
-            0% { transform: rotate(0deg) scale(1); }
-            20% { transform: rotate(-15deg) scale(0.9); }
-            40% { transform: rotate(15deg) scale(1.05); }
-            60% { transform: rotate(-10deg) scale(0.95); }
-            80% { transform: rotate(10deg) scale(1.02); }
-            100% { transform: rotate(0deg) scale(1); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cr0s Cultivo</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cr0s Cultivo">
+<meta name="theme-color" content="#0b1210">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230b1210'/><path d='M90 140V80' stroke='%2300ffcc' stroke-width='8' stroke-linecap='round'/><path d='M90 100C60 100 45 80 45 55c30 0 45 20 45 45zM90 85c25 0 40-15 40-38-25 0-40 15-40 38z' fill='%2300ffcc'/></svg>">
+<style>
+:root{
+  --bg:#0b1210;--surface:#131d19;--surface2:#1a2722;--line:#25352e;
+  --text:#eef5f1;--muted:#8aa196;--accent:#00ffcc;--accent-ink:#04201a;
+  --warn:#ffb84d;--danger:#ff6b6b;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){--bg:#f1f6f3;--surface:#fff;--surface2:#e6eee9;--line:#d3dfd8;--text:#13211b;--muted:#5b7167;--accent:#00a37f;--accent-ink:#fff;--warn:#b86e00;--danger:#c93a3a}
+}
+:root[data-theme="light"]{--bg:#f1f6f3;--surface:#fff;--surface2:#e6eee9;--line:#d3dfd8;--text:#13211b;--muted:#5b7167;--accent:#00a37f;--accent-ink:#fff;--warn:#b86e00;--danger:#c93a3a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 100 100'><path d='M50 96V50' stroke='%2300ffcc' stroke-opacity='.08' stroke-width='2' fill='none'/><path d='M50 70C24 70 12 52 12 30c26 0 38 18 38 40zM50 58c20 0 32-12 32-30-20 0-32 12-32 30z' fill='%2300ffcc' fill-opacity='.07'/></svg>") no-repeat right -60px bottom 70px/300px 300px,radial-gradient(120% 60% at 100% 100%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 60%),radial-gradient(90% 50% at 0% 100%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 60%),var(--bg);color:var(--text);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;overscroll-behavior:none;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+main{flex:1;overflow-y:auto;padding:12px 16px 24px;-webkit-overflow-scrolling:touch}
+h1{font-size:32px;font-weight:800;letter-spacing:-.5px;margin:8px 0 2px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.stats{display:flex;gap:10px;margin-bottom:16px}
+.stat{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px}
+.stat b{display:block;font-size:24px;color:var(--accent)}
+.stat span{font-size:12px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:center;width:100%;text-align:left;color:inherit;font:inherit}
+.card:active{background:var(--surface2)}
+.ico{width:52px;height:52px;border-radius:16px;background:var(--surface2);display:grid;place-items:center;font-size:28px;flex:none}
+.card .info{flex:1;min-width:0}
+.card .name{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .meta{font-size:13px;color:var(--muted)}
+.day{font-weight:800;font-size:22px;text-align:right;line-height:1}
+.day small{display:block;font-size:11px;font-weight:500;color:var(--muted)}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--surface2);color:var(--accent);margin-top:4px}
+.badge.warn{color:var(--warn)}
+.empty{text-align:center;color:var(--muted);padding:48px 16px}
+.empty .big{font-size:48px}
+nav{display:flex;background:color-mix(in srgb,var(--surface) 92%,transparent);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;border:0;color:var(--muted);font:inherit;font-size:11px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button .i{font-size:22px}
+nav button.on{color:var(--accent)}
+.fab{position:fixed;right:18px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);font-size:30px;font-weight:300;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:5}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:20;align-items:flex-end}
+.sheet-bg.open{display:flex}
+.sheet{background:var(--bg);width:100%;max-height:92%;overflow-y:auto;border-radius:24px 24px 0 0;padding:10px 18px calc(24px + env(safe-area-inset-bottom,0px));animation:up .25s ease-out;border-top:1px solid var(--line)}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px}
+.sheet h2{margin:4px 0 12px;font-size:22px}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input,select,textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px;color:var(--text);font:inherit;font-size:16px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.btn{width:100%;border:0;border-radius:16px;padding:15px;font:inherit;font-weight:700;font-size:17px;background:var(--accent);color:var(--accent-ink);margin-top:16px}
+.btn.alt{background:var(--surface2);color:var(--text)}
+.btn.del{background:transparent;color:var(--danger);margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:99px;padding:9px 14px;font:inherit;font-size:14px}
+.chip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.quick button{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 4px;color:var(--text);font:inherit;font-size:13px}
+.quick button span{display:block;font-size:24px}
+.log{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.log .t{color:var(--muted);font-size:12px;white-space:nowrap;min-width:64px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal .wd{font-size:12px;color:var(--muted);padding:4px 0}
+.cal button{aspect-ratio:1;background:var(--surface);border:1px solid transparent;border-radius:12px;color:var(--text);font:inherit;font-size:15px;position:relative}
+.cal button.off{visibility:hidden}
+.cal button.today{border-color:var(--accent)}
+.cal button.co2{border-color:var(--warn);border-style:dashed}
+.cal button.sel{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.cal button i{position:absolute;bottom:5px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--accent)}
+.cal button.sel i{background:var(--accent-ink)}
+.calh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;text-transform:capitalize}
+.calh button{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:12px;width:44px;height:40px;font-size:18px}
+.prod{display:flex;align-items:center;gap:8px;margin:10px 0}
+.prod .chip{flex:1;text-align:left}
+.prod input{width:76px;text-align:center}
+.prod b{min-width:68px;text-align:right}
+.bar{height:5px;border-radius:3px;background:var(--surface2);margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl th{color:var(--accent);font-weight:700}
+.tbl td:first-child{color:var(--muted)}
+.tbl tr.hl td{background:var(--surface2);font-weight:700}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 8px}
+.tip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-top:8px;font-size:14px}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);padding:10px 18px;border-radius:99px;font-weight:700;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+</style>
 </head>
 <body>
+<main id="main"></main>
+<button class="fab" id="fab" aria-label="Agregar planta">+</button>
+<nav>
+  <button data-tab="plants" class="on"><span class="i">🌱</span>Plantas</button>
+  <button data-tab="water"><span class="i">💧</span>Riego</button>
+  <button data-tab="cal"><span class="i">📅</span>Calendario</button>
+  <button data-tab="guide"><span class="i">📖</span>Guía</button>
+  <button data-tab="set"><span class="i">⚙️</span>Ajustes</button>
+</nav>
+<div class="sheet-bg" id="bg"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
 
-    <header>
-        <div class="brand">Cr0s</div>
-        <div class="subtitle">DICE UTILITY</div>
-    </header>
+<script>
+var STAGES=[
+  {k:"germ",n:"Germinación",e:"🌰"},{k:"plan",n:"Plántula",e:"🌱"},
+  {k:"veg",n:"Vegetativo",e:"🌿"},{k:"flor",n:"Floración",e:"🌸"},{k:"sec",n:"Secado y cura",e:"🫙"}
+];
+var ACTIONS=[
+  {k:"riego",n:"Riego",e:"💧"},{k:"nutri",n:"Nutrientes",e:"🧪"},{k:"poda",n:"Poda",e:"✂️"},
+  {k:"plaga",n:"Plagas",e:"🐛"},{k:"foto",n:"Foto/nota",e:"📝"},{k:"cosecha",n:"Cosecha",e:"🧺"}
+];
+var KEY="cr0s-cultivo-v1";
+var S={plants:[],theme:"auto"},tab="plants";
 
-    <div class="dice-container">
-        <div class="dice val-1" id="dice">
-            <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
-            <div class="dot d4"></div><div class="dot d5"></div><div class="dot d6"></div>
-            <div class="dot d7"></div><div class="dot d8"></div><div class="dot d9"></div>
-        </div>
-    </div>
+function load(){try{var r=localStorage.getItem(KEY);if(r){S=JSON.parse(r)}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar")}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function $(i){return document.getElementById(i)}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function stage(k){return STAGES.find(function(s){return s.k===k})||STAGES[0]}
+function act(k){return ACTIONS.find(function(a){return a.k===k})||{n:k,e:"•"}}
+function days(ts){return Math.max(0,Math.floor((Date.now()-ts)/864e5))}
+function ago(ts){var d=days(ts);return d===0?"hoy":d===1?"ayer":"hace "+d+" días"}
+function fmt(ts){var d=new Date(ts);return d.toLocaleDateString("es-CL",{day:"2-digit",month:"short"})+" "+d.toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit"})}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1600)}
+function lastOf(p,k){var l=p.logs.filter(function(x){return x.type===k});return l.length?l[0].t:null}
 
-    <div class="controls">
-        <button class="btn-roll" onclick="rollDice()">LANZAR DADO</button>
-    </div>
+function applyTheme(){
+  var r=document.documentElement;
+  if(S.theme==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",S.theme);
+}
 
-    <script>
-        function rollDice() {
-            const dice = document.getElementById('dice');
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-            dice.classList.add('rolling');
-            setTimeout(() => {
-                const result = Math.floor(Math.random() * 6) + 1;
-                dice.className = 'dice val-' + result;
-                dice.classList.remove('rolling');
-            }, 400);
-        }
-    </script>
+function render(){
+  var m=$("main"),h="";if(!S.cfg)S.cfg=defCfg();if(!S.cfg.cp)S.cfg.cp=defCp();if(!S.cfg.rx)S.cfg.rx={n:"",num:"",vig:""};if(!S.cfg.products.some(function(p){return p.n==="Top·Max"}))S.cfg.products.push({n:"Top·Max",ml:2,on:false});if(!S.cfg.products.some(function(p){return p.n==="Bio·Down"}))S.cfg.products.push({n:"Bio·Down",ml:0,on:true});var ORD=["Bio·Down","Bio·Grow","Bio·Bloom","Top·Max"];S.cfg.products.sort(function(a,b){return ORD.indexOf(a.n)-ORD.indexOf(b.n)});if(!S.cfg.cycle)S.cfg.cycle=90;
+  $("fab").style.display=tab==="plants"?"block":"none";
+  if(tab==="plants"){
+    var need=S.plants.filter(function(p){var l=lastOf(p,"riego");return p.stage!=="sec"&&(!l||days(l)>=3)}).length;
+    h+='<h1>Mi cultivo</h1><p class="sub">'+(S.plants.length?"Toca una planta para registrar cuidados":"Aún no tienes plantas")+'</p>';h+=co2Banner();
+    if(S.plants.length){
+      h+='<div class="stats"><div class="stat"><b>'+S.plants.length+'</b><span>Plantas</span></div><div class="stat"><b>'+need+'</b><span>Por regar</span></div></div>';
+    }
+    if(!S.plants.length){
+      h+='<div class="empty"><div class="big">🌱</div><p>Agrega tu primera planta con el botón +</p></div>';
+    }
+    S.plants.forEach(function(p){
+      var st=stage(p.stage),l=lastOf(p,"riego"),warn=p.stage!=="sec"&&(!l||days(l)>=3);
+      h+='<button class="card" data-id="'+p.id+'"><div class="ico">'+st.e+'</div><div class="info"><div class="name">'+esc(p.name)+'</div><div class="meta">'+esc(p.strain||"Sin variedad")+' · '+st.n+(p.flowerStart?' · flor día '+(days(p.flowerStart)+1):'')+'</div><span class="badge'+(warn?' warn':'')+'">💧 '+(l?ago(l):"sin riego")+'</span><div class="bar"><i style="width:'+Math.min(100,Math.round((days(p.start)+1)/(S.cfg.cycle||90)*100))+'%"></i></div></div><div class="day">'+(days(p.start)+1)+'<small>día</small></div></button>';
+    });
+  }else if(tab==="water"){h+=waterView();}else if(tab==="cal"){h+=calView();}else if(tab==="guide"){h+=guideView();}else if(tab==="log"){
+    var all=[];
+    S.plants.forEach(function(p){p.logs.forEach(function(x){all.push({p:p.name,x:x})})});
+    all.sort(function(a,b){return b.x.t-a.x.t});
+    h+='<h1>Bitácora</h1><p class="sub">Todo lo que has hecho, de reciente a antiguo</p>';
+    if(!all.length)h+='<div class="empty"><div class="big">📒</div><p>Los registros de riego y cuidados aparecerán aquí</p></div>';
+    all.slice(0,80).forEach(function(r){
+      var a=act(r.x.type);
+      h+='<div class="log"><div class="t">'+fmt(r.x.t)+'</div><div>'+a.e+' <b>'+esc(r.p)+'</b> · '+a.n+(r.x.txt?'<br><span style="color:var(--muted)">'+esc(r.x.txt)+'</span>':'')+'</div></div>';
+    });
+  }else{
+    h+='<h1>Ajustes</h1><p class="sub">Tus datos se guardan solo en este dispositivo</p>';
+    h+='<label>Apariencia</label><div class="chips">';
+    [["auto","Automático"],["dark","Oscuro"],["light","Claro"]].forEach(function(t){h+='<button class="chip'+(S.theme===t[0]?' on':'')+'" data-theme="'+t[0]+'">'+t[1]+'</button>'});
+    h+='</div>'+rxForm()+'<button class="btn alt" id="rep">Copiar informe de cultivo</button><button class="btn alt" id="exp">Copiar respaldo (JSON)</button><button class="btn alt" id="imp">Restaurar desde respaldo</button><button class="btn del" id="wipe">Borrar todos los datos</button>';
+    h+='<p class="sub" style="margin-top:20px">Para instalarla en tu iPhone: Safari → Compartir → Añadir a pantalla de inicio.</p>';
+  }
+  m.innerHTML=h;
+}
+
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function defCp(){var d=new Date();d.setDate(d.getDate()+((7-d.getDay())%7||7));return{cur:"Fase 00",next:"Fase 1 RKTR",date:iso(d)}}
+function co2Banner(){
+  var c=S.cfg.cp;if(!c.date)return"";
+  var due=Math.round((new Date(c.date+"T00:00:00")-new Date(new Date().toDateString()))/864e5);
+  var msg=due>1?"Faltan "+due+" días":due===1?"Mañana":due===0?"Hoy":"Pasó hace "+(-due)+" días";
+  return '<div class="card" style="flex-direction:column;align-items:stretch;gap:6px"><div><b>CO₂ · '+esc(c.cur)+'</b></div><div class="meta">'+msg+' pasas a <b>'+esc(c.next)+'</b></div>'+(due<=0?'<button class="btn" style="margin-top:6px" data-co2go="1">Ya hice el cambio</button>':'')+'</div>';
+}
+function defCfg(){return{liters:20,co2:false,products:[{n:"Bio·Bloom",ml:2,on:true},{n:"Bio·Grow",ml:2,on:false}]}}
+function activePlants(){return S.plants.filter(function(p){return p.stage!=="sec"})}
+var PH=[{k:"tierra",n:"Tierra",r:"6.0–7.0",i:"6.2–6.5"},{k:"coco",n:"Coco",r:"5.5–6.5",i:"5.8–6.2"},{k:"hidro",n:"Hidro",r:"5.5–6.5",i:"5.8–6.0"}];
+function phSub(){return PH.find(function(x){return x.k===S.cfg.sub})||PH[0]}
+function guideView(){
+  var T=[["Florece por","Fotoperiodo (12/12)","Edad (3 a 5 sem desde germinar)","Fotoperiodo (12/12)"],
+  ["Luz","18/6 en veg, 12/12 en flora","18 a 20 h todo el ciclo","18/6 en veg, 12/12 en flora"],
+  ["Semilla a cosecha","4 a 6 meses","2 a 3 meses","3 a 4 meses aprox"],
+  ["Floración","8 a 10 sem","Va sola, sin cambio de luz","6 a 8 sem"],
+  ["Tamaño","Grande, tú decides la veg","Chica a media","Media a grande"],
+  ["Poda y estrés","Lo tolera bien","Mínimo, casi nada","Lo tolera bien"],
+  ["Nutrientes","Dosis de la tabla","Más sensible: parte bajo","Normal, sube de a poco"],
+  ["Trasplante","Sin problema","Mejor maceta final desde el inicio","Sin problema"],
+  ["Clones","Sí","No conviene","Sí"]];
+  var h='<h1>Guía rápida</h1><p class="sub">Para cuando se te olvide lo que ya sabías</p><label>Tipo de planta</label><div class="scroll"><table class="tbl"><tr><th></th><th>Feminizada</th><th>Automática</th><th>Fast</th></tr>';
+  T.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>'});
+  h+='</table></div><label style="margin-top:18px">pH del agua de riego (depende del sustrato)</label><div class="chips" style="margin-bottom:10px">';
+  PH.forEach(function(x){h+='<button class="chip'+(S.cfg.sub===x.k||(!S.cfg.sub&&x.k==="tierra")?' on':'')+'" data-sub="'+x.k+'">'+x.n+'</button>'});
+  h+='</div><div class="scroll"><table class="tbl"><tr><th>Sustrato</th><th>Rango</th><th>Ideal</th></tr>';
+  PH.forEach(function(x){h+='<tr'+(x.k===phSub().k?' class="hl"':'')+'><td>'+x.n+'</td><td>'+x.r+'</td><td>'+x.i+'</td></tr>'});
+  h+='</table></div>';
+  ["El pH depende del sustrato, no del tipo de semilla. Elige el tuyo arriba y se muestra también en Riego.",
+   "Mide el pH con todo ya mezclado: los fertilizantes lo mueven.",
+   "Fuera de rango la planta no absorbe bien, aunque la dosis sea la correcta.",
+   "Tu orden de mezcla: Bio·Down, Bio·Grow, Bio·Bloom y al final Top·Max.",
+   "Son valores de referencia. Manda la ficha de tu genética y la tabla del fabricante."].forEach(function(t){h+='<div class="tip">'+t+'</div>'});
+  return h;
+}
+var WSel="";
+function wPlants(){return activePlants().filter(function(p){return !WSel||p.strain===WSel})}
+function rxForm(){var r=S.cfg.rx;return '<label>Días del ciclo completo (estima la cosecha)</label><input id="s-cyc" type="number" inputmode="numeric" value="'+(S.cfg.cycle||90)+'"><label>Paciente</label><input id="r-n" value="'+esc(r.n)+'"><div class="row"><div><label>N° de receta</label><input id="r-num" value="'+esc(r.num)+'"></div><div><label>Vigencia</label><input id="r-vig" value="'+esc(r.vig)+'" placeholder="dd/mm/aaaa"></div></div>'}
+function waterView(){
+  var c=S.cfg,n=wPlants().length;
+  var h='<h1>Riego</h1><p class="sub">Arma la mezcla del balde y regístrala en todas las plantas</p>';
+  var sg=[];activePlants().forEach(function(p){if(p.strain&&sg.indexOf(p.strain)<0)sg.push(p.strain)});
+  if(sg.length>1){h+='<label>Regar a</label><div class="chips"><button class="chip'+(!WSel?' on':'')+'" data-wsel="">Todas</button>'+sg.map(function(s){return'<button class="chip'+(WSel===s?' on':'')+'" data-wsel="'+esc(s)+'">'+esc(s)+'</button>'}).join("")+'</div>'}
+  h+='<label>Litros del balde</label><input id="w-l" type="number" inputmode="decimal" value="'+c.liters+'"><p class="sub" id="lpp" style="margin:6px 0 0"></p>';
+  h+='<label>Orden de mezcla: de arriba abajo (ml por litro)</label>';
+  c.products.forEach(function(p,i){h+='<div class="prod"><button class="chip'+(p.on?' on':'')+'" data-prod="'+i+'">'+esc(p.n)+'</button><input type="number" inputmode="decimal" data-ml="'+i+'" value="'+p.ml+'"><b id="tot'+i+'"></b></div>'});
+  h+='<div class="row"><div><label>pH inicial</label><input id="w-pi" type="number" inputmode="decimal" step="0.1" placeholder="7.4"></div><div><label>pH final</label><input id="w-pf" type="number" inputmode="decimal" step="0.1" placeholder="6.2"></div></div>';
+  h+='<p class="sub" style="margin:10px 0 0">pH objetivo ('+phSub().n+'): <b style="color:var(--accent)">'+phSub().i+'</b> · rango '+phSub().r+'</p>';h+='<div class="chips" style="margin-top:14px"><button class="chip'+(c.co2?' on':'')+'" data-co2="1">CO₂ activo</button></div>';
+  var cp=c.cp;h+='<label>Fase de CO₂ actual</label><input id="c-cur" value="'+esc(cp.cur)+'"><div class="row"><div><label>Siguiente fase</label><input id="c-next" value="'+esc(cp.next)+'"></div><div><label>Cambio el día</label><input type="date" id="c-date" value="'+esc(cp.date)+'"></div></div>';h+='<button class="btn" id="w-go">Registrar riego en '+n+' planta'+(n===1?'':'s')+'</button>';
+  setTimeout(wCalc,0);
+  return h;
+}
+function wCalc(){
+  var c=S.cfg,n=wPlants().length;
+  c.products.forEach(function(p,i){var el=$("tot"+i);if(el)el.textContent=(p.on?Math.round(p.ml*c.liters*10)/10:0)+" ml"});
+  var lp=$("lpp");if(lp)lp.textContent=n?(Math.round(c.liters/n*100)/100)+" L por planta ("+n+" plantas)":"Aún no hay plantas activas";
+  save();
+}
+var CM=new Date(),CS="";
+function dk(t){var d=new Date(t);return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()}
+function calView(){
+  var y=CM.getFullYear(),m=CM.getMonth(),first=new Date(y,m,1),off=(first.getDay()+6)%7,nd=new Date(y,m+1,0).getDate(),td=dk(Date.now());
+  if(!CS)CS=td;var ck="";if(S.cfg.cp.date){var q=S.cfg.cp.date.split("-");ck=+q[0]+"-"+(+q[1]-1)+"-"+(+q[2])}
+  var ev={},rows={};
+  S.plants.forEach(function(p){p.logs.forEach(function(x){var k=dk(x.t);ev[k]=1;if(k===CS){var g=x.t+x.type+x.txt;if(!rows[g])rows[g]={x:x,names:[]};rows[g].names.push(p.name)}})});
+  var h='<h1>Calendario</h1><div class="calh"><button data-cal="-1">‹</button><b>'+first.toLocaleDateString("es-CL",{month:"long",year:"numeric"})+'</b><button data-cal="1">›</button></div><div class="cal">';
+  ["L","M","M","J","V","S","D"].forEach(function(w){h+='<div class="wd">'+w+'</div>'});
+  for(var i=0;i<off;i++)h+='<button class="off"></button>';
+  for(var d=1;d<=nd;d++){var k=y+"-"+m+"-"+d;h+='<button data-day="'+k+'" class="'+(k===td?'today ':'')+(k===CS?'sel ':'')+(k===ck?'co2':'')+'">'+d+(ev[k]?'<i></i>':'')+'</button>'}
+  h+='</div><label style="margin-top:18px">Registros del día</label>';
+  var list=Object.keys(rows).map(function(g){return rows[g]}).sort(function(a,b){return b.x.t-a.x.t});
+  if(!list.length)h+='<p class="sub">Sin registros este día</p>';
+  list.forEach(function(r){var a=act(r.x.type);h+='<div class="log"><div class="t">'+new Date(r.x.t).toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit"})+'</div><div>'+a.e+' <b>'+a.n+'</b> · '+(r.names.length>1?r.names.length+' plantas':esc(r.names[0]))+(r.x.txt?'<br><span style="color:var(--muted)">'+esc(r.x.txt)+'</span>':'')+'</div></div>'});
+  return h;
+}
+function makeIcon(){
+  try{
+    var c=document.createElement("canvas");c.width=c.height=180;var x=c.getContext("2d");
+    x.fillStyle="#0b1210";x.fillRect(0,0,180,180);
+    x.fillStyle="#16241f";x.fillRect(30,42,120,108);
+    x.fillStyle="#00ffcc";x.fillRect(30,42,120,26);
+    x.fillRect(56,30,8,24);x.fillRect(116,30,8,24);
+    x.beginPath();x.moveTo(90,140);x.bezierCurveTo(56,128,54,96,90,80);x.bezierCurveTo(126,96,124,128,90,140);x.fill();
+    x.strokeStyle="#0b1210";x.lineWidth=4;x.beginPath();x.moveTo(90,136);x.lineTo(90,96);x.stroke();
+    var l=document.querySelector('link[rel="apple-touch-icon"]');if(l)l.href=c.toDataURL("image/png");
+  }catch(e){}
+}
+document.addEventListener("input",function(e){
+  var t=e.target;
+  if(t.id==="w-l"){S.cfg.liters=parseFloat(t.value)||0;wCalc()}
+  else if(t.id==="c-cur"||t.id==="c-next"||t.id==="c-date"){S.cfg.cp[t.id.slice(2)]=t.value;save()}
+  else if(t.id==="r-n"||t.id==="r-num"||t.id==="r-vig"){S.cfg.rx[t.id.slice(2)]=t.value;save()}
+  else if(t.id==="s-cyc"){S.cfg.cycle=parseInt(t.value)||90;save()}
+  else if(t.dataset&&t.dataset.ml!==undefined){S.cfg.products[+t.dataset.ml].ml=parseFloat(t.value)||0;wCalc()}
+});
+function openSheet(html){$("sheet").innerHTML='<div class="grab"></div>'+html;$("bg").classList.add("open")}
+function closeSheet(){$("bg").classList.remove("open")}
+
+function addForm(){
+  var h='<h2>Nueva planta</h2><label>Nombre</label><input id="f-name" placeholder="Ej: Planta 1" autocomplete="off">';
+  h+='<label>Variedad o especie</label><input id="f-strain" placeholder="Opcional" autocomplete="off">';
+  h+='<div class="row"><div><label>Etapa</label><select id="f-stage">'+STAGES.map(function(s){return'<option value="'+s.k+'">'+s.n+'</option>'}).join("")+'</select></div>';
+  h+='<div><label>Edad hoy (días)</label><input type="number" inputmode="numeric" id="f-age" value="0" min="0"></div></div><label>Cantidad de plantas</label><input type="number" inputmode="numeric" id="f-qty" value="1" min="1" max="30"><label>Maceta (litros)</label><input type="number" inputmode="decimal" id="f-pot" value="5">';
+  h+='<button class="btn" id="f-save">Guardar planta</button>';
+  openSheet(h);
+}
+
+function detail(id){
+  var p=S.plants.find(function(x){return x.id===id});if(!p)return;
+  var st=stage(p.stage);
+  var h='<h2>'+st.e+' '+esc(p.name)+'</h2><p class="sub">'+esc(p.strain||"Sin variedad")+' · Día '+(days(p.start)+1)+' · '+st.n+' · Maceta '+(p.pot||5)+' L</p><p class="sub" style="margin-top:-8px">Cosecha estimada: '+new Date(p.start+(S.cfg.cycle||90)*864e5).toLocaleDateString("es-CL",{day:"numeric",month:"long"})+'</p>';
+  h+='<div class="quick">'+ACTIONS.map(function(a){return'<button data-act="'+a.k+'" data-id="'+id+'"><span>'+a.e+'</span>'+a.n+'</button>'}).join("")+'</div>';
+  h+='<label>Cambiar etapa</label><div class="chips">'+STAGES.map(function(s){return'<button class="chip'+(s.k===p.stage?' on':'')+'" data-stage="'+s.k+'" data-id="'+id+'">'+s.n+'</button>'}).join("")+'</div>';
+  h+='<label style="margin-top:18px">Historial</label>';
+  if(!p.logs.length)h+='<p class="sub">Sin registros todavía</p>';
+  p.logs.slice(0,15).forEach(function(x){var a=act(x.type);h+='<div class="log"><div class="t">'+fmt(x.t)+'</div><div>'+a.e+' '+a.n+(x.txt?'<br><span style="color:var(--muted)">'+esc(x.txt)+'</span>':'')+'</div></div>'});
+  h+='<button class="btn del" data-del="'+id+'">Eliminar planta</button>';
+  openSheet(h);
+}
+
+function logForm(id,k){
+  var a=act(k),hint=k==="riego"?"Ej: 500 ml, pH 6.2":k==="nutri"?"Ej: Crecimiento 2 ml/L, EC 1.2":"Detalle (opcional)";
+  var h='<h2>'+a.e+' '+a.n+'</h2><label>Detalle</label><textarea id="l-txt" rows="3" placeholder="'+hint+'"></textarea>';
+  h+='<button class="btn" id="l-save" data-id="'+id+'" data-k="'+k+'">Guardar registro</button><button class="btn alt" data-back="'+id+'">Volver</button>';
+  openSheet(h);
+}
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest("button,.sheet-bg");if(!t)return;
+  if(t.id==="bg"&&e.target===t){closeSheet();return}
+  var d=t.dataset;
+  if(t.parentElement&&t.parentElement.tagName==="NAV"){tab=d.tab;document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b===t)});render();return}
+  if(d.sub){S.cfg.sub=d.sub;save();render();return}
+  if(d.wsel!==undefined){WSel=d.wsel;render();return}
+  if(d.co2go){var q=S.cfg.cp,now2=Date.now();S.plants.forEach(function(p){p.logs.unshift({t:now2,type:"foto",txt:"CO₂: pasó de "+q.cur+" a "+q.next})});q.cur=q.next;q.next="";q.date="";save();render();toast("CO₂ actualizado");return}
+  if(d.cal){CM=new Date(CM.getFullYear(),CM.getMonth()+parseInt(d.cal),1);render();return}
+  if(d.day){CS=d.day;render();return}
+  if(d.prod!==undefined){var pr=S.cfg.products[+d.prod];pr.on=!pr.on;save();render();return}
+  if(d.co2){S.cfg.co2=!S.cfg.co2;save();render();return}
+  if(t.id==="w-go"){
+    var c=S.cfg,pl=wPlants();
+    if(!pl.length){toast("Agrega plantas primero");return}
+    var parts=["Balde "+c.liters+" L ("+Math.round(c.liters/pl.length*100)/100+" L/planta)"];
+    c.products.forEach(function(p){if(p.on&&p.ml)parts.push(p.n+" "+Math.round(p.ml*c.liters*10)/10+" ml")});
+    var pi=$("w-pi").value,pf=$("w-pf").value;
+    if(pi||pf)parts.push("pH "+(pi||"?")+" → "+(pf||"?"));
+    
+    if(c.co2)parts.push("CO₂ "+c.cp.cur);
+    var now=Date.now();
+    pl.forEach(function(p){p.logs.unshift({t:now,type:"riego",txt:parts.join(" · ")})});
+    save();render();toast("Riego registrado");return;
+  }
+  if(t.id==="fab"){addForm();return}
+  if(t.id==="f-save"){
+    var n=$("f-name").value.trim();if(!n){toast("Escribe un nombre");return}
+    var age=parseInt($("f-age").value)||0,qty=Math.min(30,Math.max(1,parseInt($("f-qty").value)||1)),dt=Date.now()-age*864e5,sg=$("f-stage").value;
+    for(var i=qty;i>=1;i--)S.plants.unshift({id:uid(),name:qty>1?n+" "+i:n,strain:$("f-strain").value.trim(),stage:sg,start:dt,flowerStart:sg==="flor"?Date.now():0,pot:parseFloat($("f-pot").value)||5,logs:[]});
+    save();closeSheet();render();toast("Planta agregada");return;
+  }
+  if(d.id&&t.classList.contains("card")){detail(d.id);return}
+  if(d.act){logForm(d.id,d.act);return}
+  if(d.back){detail(d.back);return}
+  if(d.stage){
+    var p=S.plants.find(function(x){return x.id===d.id});
+    if(p&&p.stage!==d.stage){p.stage=d.stage;if(d.stage==="flor"&&!p.flowerStart)p.flowerStart=Date.now();p.logs.unshift({t:Date.now(),type:"foto",txt:"Etapa: "+stage(d.stage).n});save();render();detail(p.id);toast("Etapa actualizada")}
+    return;
+  }
+  if(t.id==="l-save"){
+    var q=S.plants.find(function(x){return x.id===d.id});
+    q.logs.unshift({t:Date.now(),type:d.k,txt:$("l-txt").value.trim()});
+    save();closeSheet();render();toast("Registrado");return;
+  }
+  if(d.del){if(confirm("¿Eliminar esta planta y su historial?")){S.plants=S.plants.filter(function(x){return x.id!==d.del});save();closeSheet();render()}return}
+  if(d.theme){S.theme=d.theme;save();applyTheme();render();return}
+  if(t.id==="rep"){
+    var rx=S.cfg.rx,L=["INFORME DE CULTIVO","Generado: "+fmt(Date.now())];
+    if(rx.n)L.push("Paciente: "+rx.n);if(rx.num)L.push("Receta N°: "+rx.num);if(rx.vig)L.push("Vigencia: "+rx.vig);
+    L.push("Plantas: "+S.plants.length,"");
+    S.plants.forEach(function(p){L.push(p.name+" ("+(p.strain||"s/v")+") · "+stage(p.stage).n+" · día "+(days(p.start)+1)+(p.flowerStart?" · flor día "+(days(p.flowerStart)+1):"")+" · maceta "+(p.pot||5)+" L");p.logs.slice().reverse().forEach(function(x){L.push("  "+fmt(x.t)+" "+act(x.type).n+(x.txt?": "+x.txt:""))});L.push("")});
+    var rt=L.join("\n");
+    (navigator.clipboard?navigator.clipboard.writeText(rt):Promise.reject()).then(function(){toast("Informe copiado")},function(){openSheet('<h2>Informe</h2><textarea rows="12" readonly>'+esc(rt)+'</textarea>')});
+    return;
+  }
+  if(t.id==="exp"){
+    var js=JSON.stringify(S);
+    (navigator.clipboard?navigator.clipboard.writeText(js):Promise.reject()).then(function(){toast("Respaldo copiado")},function(){openSheet('<h2>Respaldo</h2><textarea rows="8" readonly>'+esc(js)+'</textarea>')});
+    return;
+  }
+  if(t.id==="imp"){openSheet('<h2>Restaurar</h2><label>Pega tu respaldo JSON</label><textarea id="i-txt" rows="8"></textarea><button class="btn" id="i-go">Restaurar</button>');return}
+  if(t.id==="i-go"){
+    try{var o=JSON.parse($("i-txt").value);if(!o.plants)throw 0;S=o;save();applyTheme();closeSheet();render();toast("Datos restaurados")}catch(er){toast("Respaldo no válido")}
+    return;
+  }
+  if(t.id==="wipe"){if(confirm("¿Borrar todos los datos?")){S={plants:[],theme:S.theme};save();render()}}
+});
+
+load();applyTheme();makeIcon();render();
+</script>
 </body>
 </html>
