@@ -1,0 +1,15 @@
+{
+  "name": "Cr0s Dice",
+  "short_name": "Cr0s",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23121212'/><rect x='35' y='35' width='110' height='110' rx='22' fill='%231e1e1e' stroke='%23333333' stroke-width='4'/><circle cx='65' cy='65' r='10' fill='%2300ffcc'/><circle cx='115' cy='115' r='10' fill='%2300ffcc'/><circle cx='90' cy='90' r='10' fill='%2300ffcc'/><text x='90' y='160' font-family='Arial, sans-serif' font-weight='900' font-size='16' fill='%2300ffcc' text-anchor='middle' letter-spacing='2'>Cr0s</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
